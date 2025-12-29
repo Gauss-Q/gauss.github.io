@@ -1,0 +1,624 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>覃之卡 | 拥有智能工作室主理人 - AI产品专家</title>
+    <meta name="description" content="覃之卡 - AI产品运营专家，拥有智能工作室主理人。6年产品运营经验，专注AI智能体研发、培训与教育软件开发。">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Noto+Serif+SC:wght@400;700&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Inter', 'Noto Sans SC', sans-serif;
+            scroll-behavior: smooth;
+            line-height: 1.6;
+        }
+        
+        .serif { 
+            font-family: 'Noto Serif SC', serif; 
+        }
+        
+        .gradient-text {
+            background: linear-gradient(135deg, #6366f1 0%, #a855f7 50%, #ec4899 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .card-hover {
+            transition: all 0.3s ease;
+        }
+        
+        .card-hover:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(99, 102, 241, 0.15);
+        }
+
+        .hero-bg {
+            background: 
+                radial-gradient(circle at 10% 20%, rgba(99, 102, 241, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 90% 80%, rgba(236, 72, 153, 0.1) 0%, transparent 50%);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero-bg::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%239C92AC' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+            opacity: 0.3;
+        }
+        
+        /* 移动端菜单动画 */
+        .mobile-menu {
+            transform: translateX(100%);
+            transition: transform 0.3s ease;
+        }
+        
+        .mobile-menu.active {
+            transform: translateX(0);
+        }
+        
+        /* 加载动画 */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .animate-fadeInUp {
+            animation: fadeInUp 0.6s ease forwards;
+        }
+        
+        /* 浮动动画 */
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-10px);
+            }
+        }
+        
+        .float-animation {
+            animation: float 3s ease-in-out infinite;
+        }
+        
+        /* 滚动条美化 */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+        
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(135deg, #6366f1, #a855f7);
+            border-radius: 4px;
+        }
+        
+        ::-webkit-scrollbar-thumb:hover {
+            background: linear-gradient(135deg, #4f46e5, #9333ea);
+        }
+    </style>
+</head>
+<body class="bg-gray-50 text-gray-900 overflow-x-hidden">
+    
+    <!-- 移动端菜单按钮 -->
+    <button id="mobileMenuBtn" class="md:hidden fixed top-4 right-4 z-50 p-3 bg-white rounded-full shadow-lg">
+        <i class="fas fa-bars text-gray-700 text-xl"></i>
+    </button>
+
+    <!-- 移动端菜单 -->
+    <div id="mobileMenu" class="mobile-menu fixed inset-y-0 right-0 w-64 bg-white z-40 shadow-2xl p-8 pt-20">
+        <button id="closeMenuBtn" class="absolute top-4 right-4 p-2">
+            <i class="fas fa-times text-gray-600 text-xl"></i>
+        </button>
+        <div class="space-y-6">
+            <a href="#ai-studio" class="block text-lg font-medium hover:text-indigo-600 transition">AI 工作室</a>
+            <a href="#experience" class="block text-lg font-medium hover:text-indigo-600 transition">实战经验</a>
+            <a href="#life" class="block text-lg font-medium hover:text-indigo-600 transition">人文极客</a>
+            <a href="#contact" class="block text-lg font-medium hover:text-indigo-600 transition">联系合作</a>
+            <a href="mailto:qinzhika@163.com" class="block mt-8 bg-gradient-to-r from-indigo-600 to-purple-600 text-white px-6 py-3 rounded-full text-center font-medium hover:shadow-lg transition">
+                开始合作
+            </a>
+        </div>
+    </div>
+    <div id="mobileMenuOverlay" class="fixed inset-0 bg-black bg-opacity-50 z-30 hidden"></div>
+
+    <!-- Navigation -->
+    <nav class="fixed w-full z-40 bg-white/90 backdrop-blur-lg border-b border-gray-100 shadow-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex justify-between items-center">
+            <div class="text-2xl md:text-3xl font-bold gradient-text">覃之卡</div>
+            <div class="hidden md:flex space-x-10 font-medium">
+                <a href="#ai-studio" class="hover:text-indigo-600 transition flex items-center gap-2 group">
+                    <span class="group-hover:translate-x-1 transition">AI 工作室</span>
+                </a>
+                <a href="#experience" class="hover:text-indigo-600 transition flex items-center gap-2 group">
+                    <span class="group-hover:translate-x-1 transition">实战经验</span>
+                </a>
+                <a href="#life" class="hover:text-indigo-600 transition flex items-center gap-2 group">
+                    <span class="group-hover:translate-x-1 transition">人文极客</span>
+                </a>
+                <a href="mailto:qinzhika@163.com" class="bg-gradient-to-r from-indigo-600 to-purple-600 text-white px-6 py-3 rounded-full hover:shadow-lg transition hover:-translate-y-1">
+                    开启对话
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="pt-32 pb-24 hero-bg relative">
+        <div class="max-w-6xl mx-auto px-6 text-center relative z-10">
+            <div class="animate-fadeInUp">
+                <h1 class="text-4xl sm:text-5xl md:text-7xl font-bold mb-8 tracking-tight">
+                    <span class="block">连接<span class="gradient-text">智能</span>与</span>
+                    <span class="block">每一个<span class="relative">
+                        灵魂
+                        <span class="absolute -bottom-2 left-0 w-full h-1 bg-gradient-to-r from-indigo-500 to-pink-500 rounded-full"></span>
+                    </span></span>
+                </h1>
+                <p class="text-xl text-gray-600 mb-12 leading-relaxed max-w-2xl mx-auto">
+                    AI产品运营专家 / "拥有智能"工作室主理人 / 故事创作者<br>
+                    <span class="text-lg text-gray-500">让AI成为每个人的智能伙伴</span>
+                </p>
+            </div>
+            
+            <div class="flex flex-wrap justify-center gap-4 mb-16 animate-fadeInUp" style="animation-delay: 0.2s">
+                <div class="flex items-center space-x-3 bg-white/80 backdrop-blur-sm px-5 py-3 rounded-xl shadow-sm border border-gray-100 hover:shadow-md transition">
+                    <div class="w-10 h-10 rounded-full bg-indigo-100 flex items-center justify-center">
+                        <i class="fas fa-robot text-indigo-600"></i>
+                    </div>
+                    <div class="text-left">
+                        <div class="font-bold text-gray-900">10年专注</div>
+                        <div class="text-xs text-gray-500">AI领域研究</div>
+                    </div>
+                </div>
+                <div class="flex items-center space-x-3 bg-white/80 backdrop-blur-sm px-5 py-3 rounded-xl shadow-sm border border-gray-100 hover:shadow-md transition">
+                    <div class="w-10 h-10 rounded-full bg-pink-100 flex items-center justify-center">
+                        <i class="fas fa-chart-line text-pink-600"></i>
+                    </div>
+                    <div class="text-left">
+                        <div class="font-bold text-gray-900">55万+用户</div>
+                        <div class="text-xs text-gray-500">2年实现增长</div>
+                    </div>
+                </div>
+                <div class="flex items-center space-x-3 bg-white/80 backdrop-blur-sm px-5 py-3 rounded-xl shadow-sm border border-gray-100 hover:shadow-md transition">
+                    <div class="w-10 h-10 rounded-full bg-purple-100 flex items-center justify-center">
+                        <i class="fas fa-book-open text-purple-600"></i>
+                    </div>
+                    <div class="text-left">
+                        <div class="font-bold text-gray-900">600万字</div>
+                        <div class="text-xs text-gray-500">阅读领读人</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="animate-fadeInUp" style="animation-delay: 0.4s">
+                <a href="#contact" class="inline-flex items-center space-x-3 bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600 text-white px-8 py-4 rounded-full text-lg font-semibold hover:shadow-xl transition-all hover:scale-105 hover:shadow-purple-200">
+                    <span>立即探索合作可能</span>
+                    <i class="fas fa-arrow-right group-hover:translate-x-2 transition"></i>
+                </a>
+            </div>
+        </div>
+
+        <!-- 浮动元素 -->
+        <div class="absolute top-1/4 left-10 w-20 h-20 bg-indigo-300 rounded-full opacity-10 float-animation"></div>
+        <div class="absolute bottom-1/4 right-10 w-32 h-32 bg-pink-300 rounded-full opacity-10 float-animation" style="animation-delay: 1s"></div>
+    </section>
+
+    <!-- Section 1: AI Studio -->
+    <section id="ai-studio" class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="text-center mb-16">
+                <span class="inline-block bg-gradient-to-r from-indigo-100 to-purple-100 text-indigo-600 px-4 py-1 rounded-full text-sm font-semibold uppercase tracking-wider mb-4">核心业务</span>
+                <h2 class="text-4xl font-bold mb-4">"拥有智能"工作室</h2>
+                <p class="text-xl text-gray-600 max-w-2xl mx-auto italic serif">"让AI不再是冰冷的算法，而是提效的伴侣。"</p>
+            </div>
+            
+            <div class="grid md:grid-cols-3 gap-8 mb-16">
+                <!-- Service 1 -->
+                <div class="p-8 rounded-3xl bg-gradient-to-br from-indigo-50 to-white border border-indigo-100 card-hover group">
+                    <div class="w-16 h-16 bg-gradient-to-br from-indigo-500 to-indigo-700 text-white rounded-2xl flex items-center justify-center mb-8 group-hover:scale-110 transition">
+                        <i class="fas fa-brain fa-xl"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-4 text-gray-900">AI 智能体研发</h3>
+                    <p class="text-gray-600 leading-relaxed mb-6">
+                        专为个人创业者及中小企业定制。构建降本提效的自动化工作流与企业知识库，让 Agent 成为你的数字员工。
+                    </p>
+                    <div class="flex items-center text-indigo-600 font-medium">
+                        <span>了解更多</span>
+                        <i class="fas fa-arrow-right ml-2 group-hover:translate-x-2 transition"></i>
+                    </div>
+                </div>
+                <!-- Service 2 -->
+                <div class="p-8 rounded-3xl bg-gradient-to-br from-pink-50 to-white border border-pink-100 card-hover group">
+                    <div class="w-16 h-16 bg-gradient-to-br from-pink-500 to-pink-700 text-white rounded-2xl flex items-center justify-center mb-8 group-hover:scale-110 transition">
+                        <i class="fas fa-graduation-cap fa-xl"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-4 text-gray-900">AI 工具培训</h3>
+                    <p class="text-gray-600 leading-relaxed mb-6">
+                        深度实操培训：AI PPT 快速生成、AI 数字人视频制作、以及如何从 0 搭建自己的专属智能体。
+                    </p>
+                    <div class="flex items-center text-pink-600 font-medium">
+                        <span>查看课程</span>
+                        <i class="fas fa-arrow-right ml-2 group-hover:translate-x-2 transition"></i>
+                    </div>
+                </div>
+                <!-- Service 3 -->
+                <div class="p-8 rounded-3xl bg-gradient-to-br from-purple-50 to-white border border-purple-100 card-hover group">
+                    <div class="w-16 h-16 bg-gradient-to-br from-purple-500 to-purple-700 text-white rounded-2xl flex items-center justify-center mb-8 group-hover:scale-110 transition">
+                        <i class="fas fa-gamepad fa-xl"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-4 text-gray-900">AI 教育软件</h3>
+                    <p class="text-gray-600 leading-relaxed mb-6">
+                        自研软件《乌龟与AI》。通过游戏化关卡设计，帮助普通用户每天只需 5 分钟，轻松跨越 AI 学习的门槛。
+                    </p>
+                    <div class="flex items-center text-purple-600 font-medium">
+                        <span>体验产品</span>
+                        <i class="fas fa-arrow-right ml-2 group-hover:translate-x-2 transition"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 2: Experience -->
+    <section id="experience" class="py-20 bg-gradient-to-br from-gray-50 to-indigo-50">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-bold mb-4">实战沉淀：6年产品运营专家</h2>
+                <p class="text-xl text-gray-600 max-w-3xl mx-auto">从0到1打造千万营收产品，实现百万级用户增长</p>
+            </div>
+            
+            <div class="grid lg:grid-cols-2 gap-8">
+                <!-- Exp 1 -->
+                <div class="bg-white p-8 rounded-3xl shadow-lg border border-gray-100 card-hover">
+                    <div class="flex items-start gap-6">
+                        <div class="w-20 h-20 bg-gradient-to-br from-indigo-500 to-blue-500 rounded-2xl flex items-center justify-center">
+                            <i class="fas fa-rocket text-white text-2xl"></i>
+                        </div>
+                        <div>
+                            <div class="flex items-center gap-4 mb-2">
+                                <span class="bg-indigo-100 text-indigo-600 px-3 py-1 rounded-full text-sm font-semibold">产品从0到1</span>
+                                <span class="text-gray-400 text-sm italic">首年达成千万营收</span>
+                            </div>
+                            <h4 class="text-2xl font-bold mb-3 text-gray-900">B端广告平台搭建与运营</h4>
+                            <p class="text-gray-600 leading-relaxed">
+                                作为创始成员，将赠送类小工具"置顶宝"升级为核心产品"易销车"，服务超2000家企业客户。我擅长发现用户需求中隐藏的商业增量。
+                            </p>
+                            <div class="mt-6 pt-6 border-t border-gray-100">
+                                <div class="flex flex-wrap gap-2">
+                                    <span class="bg-gray-100 text-gray-700 px-3 py-1 rounded-full text-sm">产品策略</span>
+                                    <span class="bg-gray-100 text-gray-700 px-3 py-1 rounded-full text-sm">商业变现</span>
+                                    <span class="bg-gray-100 text-gray-700 px-3 py-1 rounded-full text-sm">企业服务</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Exp 2 -->
+                <div class="bg-white p-8 rounded-3xl shadow-lg border border-gray-100 card-hover">
+                    <div class="flex items-start gap-6">
+                        <div class="w-20 h-20 bg-gradient-to-br from-pink-500 to-rose-500 rounded-2xl flex items-center justify-center">
+                            <i class="fas fa-users text-white text-2xl"></i>
+                        </div>
+                        <div>
+                            <div class="flex items-center gap-4 mb-2">
+                                <span class="bg-pink-100 text-pink-600 px-3 py-1 rounded-full text-sm font-semibold">百万级用户运营</span>
+                                <span class="text-gray-400 text-sm italic">月活增长 6 倍</span>
+                            </div>
+                            <h4 class="text-2xl font-bold mb-3 text-gray-900">文旅/治理类C端产品深耕</h4>
+                            <p class="text-gray-600 leading-relaxed">
+                                通过22天实地调研与148条产品优化意见，将复杂低效的政务产品打造成百万级用户生态，实现客诉归零与数据爆发。
+                            </p>
+                            <div class="mt-6 pt-6 border-t border-gray-100">
+                                <div class="flex flex-wrap gap-2">
+                                    <span class="bg-gray-100 text-gray-700 px-3 py-1 rounded-full text-sm">用户增长</span>
+                                    <span class="bg-gray-100 text-gray-700 px-3 py-1 rounded-full text-sm">产品优化</span>
+                                    <span class="bg-gray-100 text-gray-700 px-3 py-1 rounded-full text-sm">用户体验</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 3: Life & Stories -->
+    <section id="life" class="py-20 bg-gradient-to-br from-slate-900 to-gray-900 text-white">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="grid lg:grid-cols-2 gap-12 items-start">
+                <!-- Humanities -->
+                <div>
+                    <h2 class="text-4xl font-bold mb-10">人文极客：在理性中寻找浪漫</h2>
+                    <div class="space-y-8">
+                        <div class="flex gap-6 p-6 bg-white/5 rounded-2xl border border-white/10 hover:bg-white/10 transition">
+                            <div class="w-14 h-14 rounded-xl bg-gradient-to-br from-indigo-500/20 to-blue-500/20 flex items-center justify-center shrink-0">
+                                <i class="fas fa-users text-indigo-400 text-2xl"></i>
+                            </div>
+                            <div>
+                                <h4 class="text-xl font-bold mb-2">3年100+场读书会合伙人</h4>
+                                <p class="text-gray-300 leading-relaxed">
+                                    自创"小组拼图式速读法"，曾带领书友在一年内啃完11本共计300万字的心理学教材。
+                                </p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex gap-6 p-6 bg-white/5 rounded-2xl border border-white/10 hover:bg-white/10 transition">
+                            <div class="w-14 h-14 rounded-xl bg-gradient-to-br from-pink-500/20 to-rose-500/20 flex items-center justify-center shrink-0">
+                                <i class="fas fa-film text-pink-400 text-2xl"></i>
+                            </div>
+                            <div>
+                                <h4 class="text-xl font-bold mb-2">在地铁站看完100部科幻电影</h4>
+                                <p class="text-gray-300 leading-relaxed">
+                                    深度科幻电影爱好者，相信每一帧影像都是对未来的想象，在快节奏的通勤中捕捉无限可能。
+                                </p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex gap-6 p-6 bg-white/5 rounded-2xl border border-white/10 hover:bg-white/10 transition">
+                            <div class="w-14 h-14 rounded-xl bg-gradient-to-br from-purple-500/20 to-violet-500/20 flex items-center justify-center shrink-0">
+                                <i class="fas fa-pen-nib text-purple-400 text-2xl"></i>
+                            </div>
+                            <div>
+                                <h4 class="text-xl font-bold mb-2">故事创作者</h4>
+                                <p class="text-gray-300 leading-relaxed">
+                                    擅长以寓言式笔触解构复杂逻辑，《好主意的陷阱》、《电子鱼》...用文字触碰人心。
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Story Preview -->
+                <div class="relative">
+                    <div class="bg-gradient-to-br from-gray-800/50 to-slate-900/50 p-10 rounded-3xl border border-white/10 backdrop-blur-lg shadow-2xl">
+                        <div class="absolute -top-4 -left-4 w-8 h-8 bg-pink-500 rounded-full flex items-center justify-center">
+                            <i class="fas fa-quote-left text-white text-sm"></i>
+                        </div>
+                        <h3 class="text-2xl font-bold mb-8 flex items-center gap-3">
+                            <span class="w-3 h-3 bg-pink-500 rounded-full animate-pulse"></span>
+                            作品选读：《电子鱼》
+                        </h3>
+                        <div class="serif space-y-6 text-gray-200 text-lg leading-loose italic">
+                            <p class="transform transition hover:translate-x-2 hover:text-white">"嘿兄弟，你从哪里来？"</p>
+                            <p class="transform transition hover:translate-x-2 hover:text-white">电子鱼说："我从人类的知识里来。"</p>
+                            <p class="transform transition hover:translate-x-2 hover:text-white">"你要到哪里去？"</p>
+                            <p class="transform transition hover:translate-x-2 hover:text-white">电子鱼说："我要到大海深处去。"</p>
+                            <p class="transform transition hover:translate-x-2 hover:text-white">"你是鱼吗？"</p>
+                            <p class="transform transition hover:translate-x-2 hover:text-white font-bold text-pink-300">电子鱼梗塞了一下："我们都是鱼！"</p>
+                        </div>
+                        <div class="mt-10 pt-8 border-t border-white/10 text-right">
+                            <span class="text-sm text-gray-400">—— 摘自《覃之卡作品集》</span>
+                        </div>
+                    </div>
+                    
+                    <!-- 装饰元素 -->
+                    <div class="absolute -bottom-6 -right-6 w-24 h-24 bg-gradient-to-br from-purple-500/10 to-pink-500/10 rounded-full blur-xl"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-20 bg-white">
+        <div class="max-w-4xl mx-auto px-6 text-center">
+            <h2 class="text-4xl font-bold mb-6">开启我们的对话</h2>
+            <p class="text-xl text-gray-600 mb-12 max-w-2xl mx-auto">
+                无论是AI项目合作、产品咨询，还是单纯的创意交流，我始终对有趣的想法保持开放
+            </p>
+            
+            <div class="grid md:grid-cols-3 gap-8 mb-12">
+                <div class="p-8 rounded-3xl bg-gradient-to-br from-indigo-50 to-white border border-indigo-100">
+                    <div class="w-16 h-16 bg-indigo-100 rounded-2xl flex items-center justify-center mx-auto mb-6">
+                        <i class="fas fa-envelope text-indigo-600 text-2xl"></i>
+                    </div>
+                    <h4 class="text-xl font-bold mb-3">邮箱</h4>
+                    <a href="mailto:qinzhika@163.com" class="text-gray-600 hover:text-indigo-600 transition">qinzhika@163.com</a>
+                </div>
+                
+                <div class="p-8 rounded-3xl bg-gradient-to-br from-pink-50 to-white border border-pink-100">
+                    <div class="w-16 h-16 bg-pink-100 rounded-2xl flex items-center justify-center mx-auto mb-6">
+                        <i class="fab fa-weixin text-pink-600 text-2xl"></i>
+                    </div>
+                    <h4 class="text-xl font-bold mb-3">微信</h4>
+                    <p class="text-gray-600 font-medium">qin_zhika</p>
+                </div>
+                
+                <div class="p-8 rounded-3xl bg-gradient-to-br from-purple-50 to-white border border-purple-100">
+                    <div class="w-16 h-16 bg-purple-100 rounded-2xl flex items-center justify-center mx-auto mb-6">
+                        <i class="fas fa-phone text-purple-600 text-2xl"></i>
+                    </div>
+                    <h4 class="text-xl font-bold mb-3">电话</h4>
+                    <p class="text-gray-600">135-8811-4363</p>
+                </div>
+            </div>
+            
+            <div class="bg-gradient-to-r from-indigo-50 to-purple-50 p-10 rounded-3xl border border-indigo-100">
+                <h3 class="text-2xl font-bold mb-6">准备好让AI为您工作了吗？</h3>
+                <p class="text-gray-600 mb-8 max-w-xl mx-auto">
+                    让我们共同探索AI在您业务中的可能性，创造真正的价值
+                </p>
+                <a href="mailto:qinzhika@163.com?subject=AI合作咨询&body=你好覃之卡，我对你的AI服务很感兴趣..." 
+                   class="inline-flex items-center space-x-3 bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600 text-white px-10 py-4 rounded-full text-lg font-semibold hover:shadow-xl transition-all hover:scale-105">
+                    <span>发送合作邀约</span>
+                    <i class="fas fa-paper-plane"></i>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-12 bg-gray-900 text-white">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="text-center">
+                <h3 class="text-3xl font-bold mb-6 gradient-text">覃之卡</h3>
+                <p class="text-gray-400 mb-8 max-w-2xl mx-auto">
+                    连接人工智能与人文温度，让科技服务每一个鲜活的灵魂
+                </p>
+                
+                <div class="flex justify-center space-x-6 mb-8">
+                    <a href="mailto:qinzhika@163.com" class="w-12 h-12 bg-gray-800 rounded-full flex items-center justify-center hover:bg-indigo-600 transition">
+                        <i class="fas fa-envelope"></i>
+                    </a>
+                    <div class="w-12 h-12 bg-gray-800 rounded-full flex items-center justify-center">
+                        <i class="fab fa-weixin text-gray-400"></i>
+                    </div>
+                    <div class="w-12 h-12 bg-gray-800 rounded-full flex items-center justify-center">
+                        <i class="fab fa-linkedin-in text-gray-400"></i>
+                    </div>
+                    <div class="w-12 h-12 bg-gray-800 rounded-full flex items-center justify-center">
+                        <i class="fab fa-github text-gray-400"></i>
+                    </div>
+                </div>
+                
+                <div class="border-t border-gray-800 pt-8">
+                    <p class="text-sm text-gray-500">
+                        &copy; 2025 覃之卡 | 拥有智能工作室. 保留所有权利.
+                    </p>
+                    <p class="text-xs text-gray-600 mt-2">
+                        AI产品专家 · 智能体研发 · 人文极客
+                    </p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Back to Top Button -->
+    <button id="backToTop" class="fixed bottom-8 right-8 w-12 h-12 bg-gradient-to-r from-indigo-600 to-purple-600 text-white rounded-full shadow-lg flex items-center justify-center hover:shadow-xl transition-all hover:scale-110 hidden z-30">
+        <i class="fas fa-chevron-up"></i>
+    </button>
+
+    <script>
+        // 移动端菜单控制
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const mobileMenu = document.getElementById('mobileMenu');
+        const closeMenuBtn = document.getElementById('closeMenuBtn');
+        const mobileMenuOverlay = document.getElementById('mobileMenuOverlay');
+
+        mobileMenuBtn.addEventListener('click', () => {
+            mobileMenu.classList.add('active');
+            mobileMenuOverlay.classList.remove('hidden');
+        });
+
+        closeMenuBtn.addEventListener('click', () => {
+            mobileMenu.classList.remove('active');
+            mobileMenuOverlay.classList.add('hidden');
+        });
+
+        mobileMenuOverlay.addEventListener('click', () => {
+            mobileMenu.classList.remove('active');
+            mobileMenuOverlay.classList.add('hidden');
+        });
+
+        // 回到顶部按钮
+        const backToTopBtn = document.getElementById('backToTop');
+        
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 300) {
+                backToTopBtn.classList.remove('hidden');
+            } else {
+                backToTopBtn.classList.add('hidden');
+            }
+        });
+
+        backToTopBtn.addEventListener('click', () => {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+
+        // 滚动导航高亮
+        const sections = document.querySelectorAll('section');
+        const navLinks = document.querySelectorAll('nav a');
+        
+        window.addEventListener('scroll', () => {
+            let current = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                if (scrollY >= (sectionTop - 200)) {
+                    current = section.getAttribute('id');
+                }
+            });
+
+            navLinks.forEach(link => {
+                link.classList.remove('text-indigo-600');
+                if (link.getAttribute('href') === `#${current}`) {
+                    link.classList.add('text-indigo-600');
+                }
+            });
+        });
+
+        // 添加滚动动画
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('animate-fadeInUp');
+                }
+            });
+        }, observerOptions);
+
+        // 观察所有卡片和内容区域
+        document.querySelectorAll('.card-hover, .rounded-3xl, .grid > div').forEach((el) => {
+            observer.observe(el);
+        });
+
+        // 平滑滚动
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href');
+                if (targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                    
+                    // 移动端点击后关闭菜单
+                    if (window.innerWidth < 768) {
+                        mobileMenu.classList.remove('active');
+                        mobileMenuOverlay.classList.add('hidden');
+                    }
+                }
+            });
+        });
+
+        // 初始化页面时添加动画类
+        document.addEventListener('DOMContentLoaded', () => {
+            document.body.classList.add('loaded');
+        });
+    </script>
+</body>
+</html>
